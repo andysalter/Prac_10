@@ -1,4 +1,4 @@
-from player_setup import player_setup as player_setup
+
 
 
 def gladiatorialCombat(army1, army2):
@@ -45,10 +45,3 @@ def gladiatorialCombat(army1, army2):
 
 
 
-print("Player 1 Setup:\n")
-player_1 = player_setup()
-
-print("Player 2 Setup:\n")
-player_2 = player_setup()
-
-gladiatorialCombat(player_1, player_2)
