@@ -3,6 +3,9 @@ from Army import Army
 def player_setup():
     name = input("\tEnter your name: ")
     gold = 20
+    n_soldiers = 0
+    n_archers = 0
+    n_cavalry = 0
 
     while True:
         try:
@@ -18,8 +21,9 @@ def player_setup():
             continue
 
         gold -= n_soldiers
+        break
 
-    while True:
+    while True and gold > 0:
         try:
             n_archers = int(input("\tHow many archers would you like?: "))
             if n_archers < 0:
@@ -33,8 +37,9 @@ def player_setup():
             continue
 
         gold -= n_archers * 2
+        break
 
-    while True:
+    while True and gold > 0:
         try:
             n_cavalry = int(input("\tHow many cavalrymen would you like?: "))
             if n_cavalry < 0:
@@ -48,6 +53,7 @@ def player_setup():
             continue
 
         gold -= n_cavalry * 3
+        break
 
     return Army(name, n_soldiers, n_archers, n_cavalry)
 
