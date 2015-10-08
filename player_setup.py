@@ -1,5 +1,6 @@
 from Army import Army
 
+
 def player_setup():
     name = input("\tEnter your name: ")
     gold = 20
@@ -58,9 +59,5 @@ def player_setup():
     return Army(name, n_soldiers, n_archers, n_cavalry)
 
 
-print("Player 1 Setup:\n")
-P1_army = player_setup()
 
-print("Player 2 Setup:\n")
-P2_army = player_setup()
 

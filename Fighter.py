@@ -7,8 +7,8 @@ class Fighter:
     def isAlive(self):
         return self.life > 0
 
-    def loseLife(self, lostLife):
-        self.life -= lostLife
+    def loseLife(self, life_lost):
+        self.life -= life_lost
         if self.life < 0:
             self.life = 0
 
@@ -21,12 +21,8 @@ class Soldier(Fighter):
     def __init__(self):
         self.life = 3
         self.experience = 0
-        self.speed = 1 + self.experience
-        self.damage = 1 + self.experience
 
-
-
-    def getSpeed(self):
+    def speed(self):
         return 1 + self.experience
 
     def attack(self):
@@ -34,7 +30,7 @@ class Soldier(Fighter):
 
     def defend(self, damage):
         if damage > self.experience:
-            self.life -= 1
+            self.loseLife(1)
 
 class Archer(Fighter):
     cost = 2
@@ -43,14 +39,14 @@ class Archer(Fighter):
         self.life = 3
         self.experience = 0
 
-    def getSpeed(self):
+    def speed(self):
         return 3
 
     def attack(self):
         return 1 + self.experience
 
     def defend(self, damage):
-        self.life -= 1
+        self.loseLife(1)
 
 class Cavalry(Fighter):
     cost = 3
@@ -59,15 +55,15 @@ class Cavalry(Fighter):
         self.life = 4
         self.experience = 0
 
-    def getSpeed(self):
-        return 3
+    def speed(self):
+        return 2
 
     def attack(self):
         return 2*self.experience + 1
 
     def defend(self, damage):
         if damage > (self.experience / 2):
-            self.life -= 1
+            self.loseLife(1)
 
 
 
