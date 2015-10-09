@@ -1,11 +1,12 @@
 
 class Menu:
-    def __init__(self, option_list=[]):
+    def __init__(self, prompt, option_list=[]):
         assert type(option_list) is list, "Options must be in a list"
         self.options = option_list
+        self.prompt = '\n' + prompt + '\n\n'
 
     def __str__(self):
-        string = "\nPlease select an option:\n\n"
+        string = self.prompt
         options = list(enumerate(self.options))
         for count, operation in options:
             string += str(count + 1) + ". " + str(operation) + "\n"

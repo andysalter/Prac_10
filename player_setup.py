@@ -1,5 +1,5 @@
 from Army import Army
-
+import random
 
 def player_setup():
     name = input("\tEnter your name: ")
@@ -59,5 +59,20 @@ def player_setup():
     return Army(name, n_soldiers, n_archers, n_cavalry)
 
 
+def random_army():
+    name = 'Computer'
+    gold = 20
+    n_soldiers = n_archers = n_cavalry = 0
+    while gold > 0:
+        cavalry = random.choice(range(gold//3+1))
+        n_cavalry += cavalry
+        gold -= cavalry * 3
+        archers = random.choice(range(gold//2+1))
+        n_archers += archers
+        gold -= archers * 2
+        soldiers = random.choice(range(gold+1))
+        n_soldiers += soldiers
+        gold -= soldiers
 
 
+    return Army(name, n_soldiers, n_archers, n_cavalry)

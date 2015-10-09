@@ -1,5 +1,6 @@
 
 class Fighter:
+
     def __str__(self):
         return 'Unit: ' + '{:9}'.format(self.__class__.__name__) + ' > life: ' \
                + str(self.life) + '   > exp: ' + str(self.experience)
