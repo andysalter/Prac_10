@@ -1,7 +1,7 @@
+from Army import gladiator_army
 
 
-
-def gladiatorialCombat(army1, army2):
+def combat(unit1, unit2):
     """
     Complexity: O(n)
     When two units engage in an Encounter, their respective Speed is compared, and the unit with the greatest Speed attacks
@@ -12,45 +12,53 @@ def gladiatorialCombat(army1, army2):
     Each unit in the army will continue to fight until they have been killed or have brought their army to victory.
     At the end of an Encounter, if both units are still alive, they re-Encounter each other.
     """
-    while army1 > 0 and army2 > 0:
-        army1_unit = army1.next_fighter()
-        army2_unit = army2.next_fighter()
 
-        if army1_unit.speed() == army2_unit.speed():
-            army1_unit.defend(army2_unit.attack())
-            army2_unit.defend(army1_unit.attack())
+    if unit1.speed() == unit2.speed():
+        unit1.defend(unit2.attack())
+        unit2.defend(unit1.attack())
 
-        elif army1_unit.speed() < army2_unit.speed():
-            army1_unit.defend(army2_unit.attack())
-            if army1_unit.isAlive():
-                army2_unit.defend(army1_unit.attack())
+    elif unit1.speed() < unit2.speed():
+        unit1.defend(unit2.attack())
+        if unit1.isAlive():
+            unit2.defend(unit1.attack())
 
-        else:
-            army2_unit.defend(army1_unit.attack())
-            if army2_unit.isAlive():
-                army1_unit.defend(army2_unit.attack())
+    else:
+        unit2.defend(unit1.attack())
+        if unit2.isAlive():
+            unit1.defend(unit2.attack())
+
+    if unit1.isAlive() and unit2.isAlive():
+        unit1.loseLife(1)
+        unit2.loseLife(1)
+    else:
+        for unit in (unit1, unit2):
+            if unit.isAlive():
+                unit.experience += 1
+
+    return unit1, unit2
 
 
-        if army1_unit.isAlive() and army2_unit.isAlive():
-            army1_unit.loseLife(1)
-            army2_unit.loseLife(1)
-        else:
-            for unit in (army1_unit, army2_unit):
-                if unit.isAlive():
-                    unit.experience += 1
+def gladiatorialCombat(player1, player2):
+    print("The battle begins!")
+    p1_army = gladiator_army(*player1)
+    p2_army = gladiator_army(*player2)
 
-        if army1_unit.isAlive():
-            army1.fighter_stack.push(army1_unit)
+    while p1_army > 0 and p2_army > 0:
+        p1_unit = p1_army.next_fighter()
+        p2_unit = p2_army.next_fighter()
+        units = combat(p1_unit, p2_unit)
 
-        if army2_unit.isAlive():
-            army2.fighter_stack.push(army2_unit)
+        if units[0].isAlive():
+            p1_army.fighter_stack.push(units[0])
 
-    # if size of army1 = size of army2 = 0 then draw
-    if army1 == army2:
+        if units[1].isAlive():
+            p2_army.fighter_stack.push(units[1])
+
+    if p1_army == p2_army:
         print("Both armies have been annihilated! The game is a draw")
 
     else:
-        winning_army = max(army1, army2)
+        winning_army = max(p1_army, p2_army)
         print('\n' + winning_army.player + ' has won the battle! Here stands the remaining victors!:\n')
         while not winning_army.fighter_stack.is_empty():
             print(winning_army.fighter_stack.pop())

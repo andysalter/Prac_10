@@ -74,8 +74,7 @@ attributes and their cost in gold.
 
 """
 from menu import Menu
-from combat \
-    import gladiatorialCombat as gladiatorialCombat
+from combat import gladiatorialCombat
 
 from player_setup \
     import player_setup as player_setup, random_army as random_army
@@ -87,27 +86,32 @@ def go_main_menu():
 
 
 def start_game():
+    # select PvP or PvE
     print(player_menu)
     selection = int(input())
     player_mode = player_select[selection]
 
+    # setup player 1
     print("Player 1 Setup:\n")
-    player_1 = player_setup()
+    player_1 = player_setup()   # assigns tuple (name, n_soldiers, n_archers, n_cavalry)
 
     if player_mode == 'PvP':
         print("Player 2 Setup:\n")
         player_2 = player_setup()
     else:
+        # if PvE create random army
         player_2 = random_army()
         print('\nEnemy Army:',
-              '\tSoldiers: '+str(player_2.n_soldiers),
-              '\tArchers: '+str(player_2.n_archers),
-              '\tCavalrymen: '+str(player_2.n_cavalry), sep='\n')
+              '\tSoldiers: '+str(player_2[1]),
+              '\tArchers: '+str(player_2[2]),
+              '\tCavalrymen: '+str(player_2[3]), sep='\n')
 
     print(combat_menu)
     selection = int(input())
-    print("The battle begins!")
     combat_select[selection](player_1, player_2)
+
+
+
     go_main_menu()
 
 

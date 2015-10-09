@@ -1,5 +1,6 @@
-from Army import Army
+from Army import gladiator_army
 import random
+
 
 def player_setup():
     name = input("\tEnter your name: ")
@@ -56,7 +57,7 @@ def player_setup():
         gold -= n_cavalry * 3
         break
 
-    return Army(name, n_soldiers, n_archers, n_cavalry)
+    return name, n_soldiers, n_archers, n_cavalry
 
 
 def random_army():
@@ -74,5 +75,4 @@ def random_army():
         n_soldiers += soldiers
         gold -= soldiers
 
-
-    return Army(name, n_soldiers, n_archers, n_cavalry)
+    return name, n_soldiers, n_archers, n_cavalry

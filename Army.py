@@ -2,7 +2,7 @@ from Fighter import *
 from Stack import Stack
 
 
-class Army():
+class gladiator_army():
     def __init__(self, player_name, n_soldiers, n_archers, n_cavalry):
         """
         Complexity: O(n)

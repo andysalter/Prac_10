@@ -1,4 +1,4 @@
-from Army import Army
+from Army import gladiator_army
 from Fighter import *
 
 
